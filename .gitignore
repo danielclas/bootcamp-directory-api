@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+devcamper_project_resources
+config/config.env
