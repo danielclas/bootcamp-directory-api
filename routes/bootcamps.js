@@ -3,6 +3,8 @@ const { getBootcamps, getBootcamp, createNewBootcamp, updateBootcamp, deleteBoot
 = require('../controllers/bootcamps');
 const router = express.Router();
 
+//Associate a route within our bootcamp subroute to different controllers
+//On server.js, /api/v1/bootcamps is associated with this file
 router.route('/')
     .get(getBootcamps)
     .post(createNewBootcamp);
