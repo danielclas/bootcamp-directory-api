@@ -13,6 +13,7 @@ connectDB();
 
 //Router files
 const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
 
 //Initialize app var with express
 const app = express();
@@ -25,6 +26,7 @@ if(process.env.NODE_ENV === 'development') app.use(logger('dev'));
 
 //Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
+app.use('/api/v1/courses', courses);
 
 //Use error handler middleware
 app.use(errorHandler);
