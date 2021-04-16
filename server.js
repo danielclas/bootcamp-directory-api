@@ -4,6 +4,10 @@ const logger = require('morgan');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const errorHandler = require('./middleware/error');
+const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
+const path = require('path');
+const auth = require('./routes/auth');
 
 //Load ENV vars
 dotenv.config({path: './config/config.env'});
@@ -21,12 +25,22 @@ const app = express();
 //Body parser
 app.use(express.json());
 
+//Cookie parser
+app.use(cookieParser());
+
 //Use logger middleware on all requests when ENV = dev
 if(process.env.NODE_ENV === 'development') app.use(logger('dev'));
+
+//File uploading
+app.use(fileUpload());
+
+//Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
+app.use('/api/v1/auth', auth);
 
 //Use error handler middleware
 app.use(errorHandler);
