@@ -105,3 +105,4 @@ dist
 
 devcamper_project_resources
 config/config.env
+public
