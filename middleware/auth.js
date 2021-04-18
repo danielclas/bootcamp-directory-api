@@ -8,9 +8,9 @@ exports.protect = asyncHandler(async (req,res,next) => {
 
     if(token && token.startsWith('Bearer')){
         token = token.split(' ')[1];
-    }/*else if(req.cookies.token){
+    }else if(req.cookies.token){
         token = req.cookies.token;
-    }*/
+    }
 
     //Make sure token exists
     if(!token) return next(new ErrorResponse('Unauthorized', 401));
