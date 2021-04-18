@@ -2,15 +2,16 @@
 
 >Backend API for Bootcamp Directory application
 
-##Usage
+![Node badge](https://badges.aleen42.com/src/node.svg) ![JS Badge](https://badges.aleen42.com/src/javascript.svg)
+## Usage
 Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own
 
-##Install dependencies
+## Install dependencies
 ```
 npm install
 ```
 
-##Seed the DB
+## Seed the DB
 Use seeder.js to populate or empty the DB
 ```
 # Seed the DB
@@ -20,7 +21,7 @@ node seeder -i
 node seeder -d
 ```
 
-##Run App
+## Run App
 ```
 # Run in dev mode
 npm run dev
@@ -28,7 +29,5 @@ npm run dev
 # Run in prod mode
 npm start
 ```
-
-
 
 ### Version 1.0.0
