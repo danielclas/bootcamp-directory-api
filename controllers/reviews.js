@@ -6,6 +6,7 @@ const advancedResults = require('../middleware/advancedResults');
 const router = express.Router({mergeParams: true});
 const { protect, authorize } = require('../middleware/auth');
 const asyncHandler = require('../middleware/async'); 
+const ErrorResponse = require('../utils/errorResponse');
 
 // @desc Get reviews
 // @route GET /api/v1/reviews
