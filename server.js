@@ -1,6 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const logger = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const xssClean = require('xss-clean');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const errorHandler = require('./middleware/error');
@@ -38,6 +43,26 @@ app.use(fileUpload());
 
 //Sanitize data
 app.use(mongoSanitize());
+
+//Set security headers
+app.use(helmet());
+
+//Prevent XXS
+app.use(xssClean());
+
+//Rate limiting
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, //10 mins
+    max: 100
+});
+
+app.use(limiter);
+
+//Prevent HTTP param pollution
+app.use(hpp());
+
+//Enable CORS
+app.use(cors());
 
 //Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
