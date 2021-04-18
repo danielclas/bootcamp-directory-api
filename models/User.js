@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const Roles = require('../utils/roles');
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -18,10 +19,10 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: [
-            'user',
-            'publisher'
+            Roles.USER,
+            Roles.PUBLISHER
         ],
-        default: 'user'
+        default: Roles.USER
     },
     password: {
         type: String,

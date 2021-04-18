@@ -2,6 +2,7 @@ const Bootcamp = require('../models/Bootcamp');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
 const geocoder = require('../utils/geocoder');
+const Roles = require('../utils/roles');
 const path = require('path');
 // @desc Get all bootcamps
 // @route GET /api/v1/bootcamps
@@ -29,7 +30,7 @@ exports.createNewBootcamp = asyncHandler(async (req,res,next) => {
     const publishedBootcamp = await Bootcamp.findOne({user: req.user.id});
 
     //If user is not an admin, they can only add one bootcamp
-    if(publishedBootcamp && req.user.role !== 'admin'){
+    if(publishedBootcamp && req.user.role !== Roles.ADMIN){
         return next(
             new ErrorResponse(
                 `The user with ID ${req.user.id} has already published a bootcamp`, 
@@ -59,7 +60,7 @@ exports.updateBootcamp = asyncHandler(async(req,res,next) => {
     }
 
     //Make sure user is bootcamp owner
-    if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){        
+    if(bootcamp.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){        
         return next(
             new ErrorResponse(`User ${req.user.id} cannot update this bootcamp`, 401)
         );
@@ -87,7 +88,7 @@ exports.deleteBootcamp = asyncHandler(async (req,res,next) => {
     }
 
     //Make sure user is bootcamp owner
-    if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){        
+    if(bootcamp.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){        
         return next(
             new ErrorResponse(`User ${req.user.id} cannot update this bootcamp`, 401)
         );
@@ -138,7 +139,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req,res,next) => {
     }
 
     //Make sure user is bootcamp owner
-    if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){        
+    if(bootcamp.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){        
         return next(
             new ErrorResponse(`User ${req.user.id} cannot update this bootcamp`, 401)
         );

@@ -7,6 +7,7 @@ const router = express.Router({mergeParams: true});
 const { protect, authorize } = require('../middleware/auth');
 const asyncHandler = require('../middleware/async'); 
 const ErrorResponse = require('../utils/errorResponse');
+const Roles = require('../utils/roles');
 
 // @desc Get reviews
 // @route GET /api/v1/reviews
@@ -97,7 +98,7 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
     }
 
     //Make sure review belongs to user or user is admin
-    if(review.user.toString() !== req.user.id && req.user.role !== 'admin'){
+    if(review.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){
         return next(
             new ErrorResponse(
                 'Unauthorized',
@@ -135,7 +136,7 @@ exports.deleteReview = asyncHandler(async (req, res, next) => {
     }
 
     //Make sure review belongs to user or user is admin
-    if(review.user.toString() !== req.user.id && req.user.role !== 'admin'){
+    if(review.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){
         return next(
             new ErrorResponse(
                 'Unauthorized',

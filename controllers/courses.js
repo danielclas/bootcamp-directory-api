@@ -2,6 +2,7 @@ const Course = require('../models/Course');
 const Bootcamp = require('../models/Bootcamp');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
+const Roles = require('../utils/roles');
 
 // @desc Get all courses
 // @route GET /api/v1/courses
@@ -52,7 +53,7 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
     if(!bootcamp) return next(new ErrorResponse(`No bootcamp with the id of ${req.params.bootcampId}`), 404)
 
     //Make sure user is bootcamp owner
-    if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){        
+    if(bootcamp.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){        
         return next(
             new ErrorResponse(`User ${req.user.id} unauthorized to add a course to bootcamp with ID ${bootcamp._id}`, 401)
         );
@@ -76,7 +77,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`), 404)
 
     //Make sure user is course owner
-    if(course.user.toString() !== req.user.id && req.user.role !== 'admin'){        
+    if(course.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){        
         return next(
             new ErrorResponse(`User ${req.user.id} unauthorized to update course with ID ${course._id}`, 401)
         );
@@ -103,7 +104,7 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`), 404)
 
     //Make sure user is course owner
-    if(course.user.toString() !== req.user.id && req.user.role !== 'admin'){        
+    if(course.user.toString() !== req.user.id && req.user.role !== Roles.ADMIN){        
         return next(
             new ErrorResponse(`User ${req.user.id} unauthorized to delete course with ID ${course._id}`, 401)
         );
