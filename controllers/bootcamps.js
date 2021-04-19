@@ -4,6 +4,7 @@ const ErrorResponse = require('../utils/errorResponse');
 const geocoder = require('../utils/geocoder');
 const Roles = require('../utils/roles');
 const path = require('path');
+
 // @desc Get all bootcamps
 // @route GET /api/v1/bootcamps
 // @access Public

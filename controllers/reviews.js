@@ -1,10 +1,5 @@
-const express = require('express');
-const { } = require('./reviews');
 const Review = require('../models/Review');
 const Bootcamp = require('../models/Bootcamp');
-const advancedResults = require('../middleware/advancedResults');
-const router = express.Router({mergeParams: true});
-const { protect, authorize } = require('../middleware/auth');
 const asyncHandler = require('../middleware/async'); 
 const ErrorResponse = require('../utils/errorResponse');
 const Roles = require('../utils/roles');

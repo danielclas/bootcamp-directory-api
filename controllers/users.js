@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
-const crypto = require('crypto');
 
 // @desc Get all users
 // @route GET /api/v1/users
